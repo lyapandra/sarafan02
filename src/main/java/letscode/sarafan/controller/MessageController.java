@@ -1,6 +1,8 @@
 package letscode.sarafan.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import letscode.sarafan.domain.Message;
+import letscode.sarafan.domain.Views;
 import letscode.sarafan.repo.MessageRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +30,13 @@ public class MessageController {
     }};*/
 
     @GetMapping
+    @JsonView(Views.IdName.class)
     public List<Message> list() {
         return messageRepo.findAll();
     }
 
     @GetMapping("{id}")
+    @JsonView(Views.FullMessage.class)
     public Message getOne(@PathVariable("id") Message message/*String id*/) {
         return message;
     }
